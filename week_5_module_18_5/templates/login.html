@@ -1,0 +1,27 @@
+{% extends 'base.html' %} {% load crispy_forms_tags %} {% block content %}
+
+<form
+  method="post"
+  style="
+    width: 50%;
+    margin: auto;
+    background-color: navy;
+    color: white;
+    padding: 20px;
+    margin-top: 20px;
+  "
+  novalidate
+>
+  <h1>Please Login !!</h1>
+  <!---{{form | crispy}} -->
+  {% csrf_token %} {% if form.non_field_errors %}
+  <b></b>
+  {% for er in form.non_field_errors %}
+
+  <p class="bg-danger text-white p-2">{{er}}</p>
+  {% endfor %} {% endif %} {% for fm in form %} {{fm.label_tag}} {{fm}}
+  <p class="text-danger">{{fm.errors| striptags}}</p>
+  {% endfor %}
+  <button class="btn btn-info mt-2" type="submit">Login</button>
+</form>
+{% endblock %}

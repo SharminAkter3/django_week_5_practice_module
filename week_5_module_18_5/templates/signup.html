@@ -1,0 +1,43 @@
+{% extends 'base.html' %} {% load crispy_forms_tags %} {% block content %}
+<br />
+{% if messages %} {% for m in messages %}
+
+<small
+  class="fs-3 fw-bold text-warning mx-5"
+  {%
+  if
+  m.tags
+  %}
+  class="{{m.tags}}"
+  {%
+  endif
+  %}
+  >{{m}}</small
+>
+{% endfor %} {% endif %} {% load crispy_forms_tags %}
+<form
+  method="post"
+  style="
+    width: 50%;
+    margin: auto;
+    background-color: navy;
+    color: white;
+    padding: 20px;
+    margin-top: 20px;
+  "
+  novalidate
+>
+  <h1>SignUp Please!!</h1>
+  <!---{{form | crispy}} -->
+  {% csrf_token %} {% for fm in form %} {{fm.label_tag}} {{fm}}
+  <p>{{fm.errors| striptags}}</p>
+  {% endfor %}
+  <button class="btn btn-info mt-2" type="submit">Submit</button>
+  <br />
+  <small
+    >Already have an account! Please
+    <a href="{% url 'login' %}">Login</a></small
+  >
+</form>
+
+{% endblock %}
